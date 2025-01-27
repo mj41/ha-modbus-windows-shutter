@@ -1,0 +1,118 @@
+views:
+  - title: Home
+    cards: []
+    type: sections
+    max_columns: 1
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Example Shutters
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: kitchen
+                shutter_action: up
+            entity: ""
+            name: Kitchen Up
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: kitchen
+                shutter_action: down
+            entity: ""
+            name: Kitchen Down
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: living_room_east_left
+                shutter_action: up
+            entity: ""
+            name: Living Room East Left Up
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: living_room_east_left
+                shutter_action: down
+            entity: ""
+            name: Living Room East Left Down
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: living_room_east_right
+                shutter_action: up
+            entity: ""
+            name: Living Room East Right Up
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: living_room_east_right
+                shutter_action: down
+            entity: ""
+            name: Living Room East Right Down
+            icon: mdi:window-shutter
+            show_state: true
+          - type: heading
+            heading: Shutter Groups
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: east
+                shutter_action: up
+            entity: ""
+            name: East Group Up
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: east
+                shutter_action: down
+            entity: ""
+            name: East Group Down
+            icon: mdi:window-shutter
+            show_state: true

@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+python3 custom_windows_shutter.py $@ 2>&1 | tee -a custom_windows_shutter.logs

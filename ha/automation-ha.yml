@@ -1,0 +1,2 @@
+shell_command:
+  custom_windows_shutter: "./custom_windows_shutter {{ shutter_action }} {{ shutter_name }}"

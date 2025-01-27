@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+echo "$1" "$2" | tee -a custom_windows_shutter.txt
+

@@ -1,0 +1,5 @@
+# Simulator Modbus Configuration
+CONNECTION_TYPE: "tcp"
+DEVICE_PORT: "localhost"
+SLAVE_ID: 21
+DEBUG_MODBUS: False

@@ -1,0 +1,12 @@
+shutters:
+  kitchen:
+    relays: [1, 2]
+    timing: [1, 1]
+  living_room_east_left:
+    relays: [3, 4]
+    timing: [2, 2]
+  living_room_east_right:
+    relays: [5, 6]
+    timing: [2, 2]
+shutter_groups:
+  east: [kitchen, living_room_east_left, living_room_east_right]
