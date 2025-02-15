@@ -4,3 +4,4 @@ temp/
 /config.yaml
 /custom_windows_shutter.yaml
 /custom_windows_shutter-modbus.yaml
+./custom_windows_shutter.logs
