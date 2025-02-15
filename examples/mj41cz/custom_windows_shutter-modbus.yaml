@@ -1,0 +1,4 @@
+CONNECTION_TYPE: "serial"
+DEVICE_PORT: "/dev/ttyACM1"
+SLAVE_ID: 21
+DEBUG_MODBUS: false

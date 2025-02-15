@@ -1,7 +1,6 @@
-.venv
-temp/
 __pycache__/
-config.yaml
-custom_windows_shutter.yaml
-custom_windows_shutter-modbus.yaml
-
+temp/
+/.venv
+/config.yaml
+/custom_windows_shutter.yaml
+/custom_windows_shutter-modbus.yaml

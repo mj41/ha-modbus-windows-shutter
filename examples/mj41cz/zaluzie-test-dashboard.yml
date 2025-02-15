@@ -1,0 +1,391 @@
+views:
+  - title: Home
+    cards: []
+    type: sections
+    max_columns: 1
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Skupiny
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: vse
+                shutter_action: up
+            entity: ''
+            name: nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: vse
+                shutter_action: down
+            entity: ''
+            name: dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_kuchyn
+                shutter_action: up
+            entity: ''
+            name: obyvak_kuchyn nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_kuchyn
+                shutter_action: down
+            entity: ''
+            name: obyvak_kuchyn dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih
+                shutter_action: up
+            entity: ''
+            name: jih nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih
+                shutter_action: down
+            entity: ''
+            name: jih dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih_vychod
+                shutter_action: up
+            entity: ''
+            name: jih_vychod nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih_vychod
+                shutter_action: down
+            entity: ''
+            name: jih_vychod dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: zapad
+                shutter_action: up
+            entity: ''
+            name: zapad nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: zapad
+                shutter_action: down
+            entity: ''
+            name: zapad dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detske_loznice
+                shutter_action: up
+            entity: ''
+            name: detske_loznice nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detske_loznice
+                shutter_action: down
+            entity: ''
+            name: detske_loznice dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - type: heading
+            heading: Kuchyň
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: kuchyn
+                shutter_action: up
+            entity: ''
+            name: nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: kuchyn
+                shutter_action: down
+            entity: ''
+            name: dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - type: heading
+            icon: mdi:fridge
+            heading: Obývací pokoj
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_prave
+                shutter_action: up
+            entity: ''
+            name: západ pravé nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_prave
+                shutter_action: down
+            entity: ''
+            name: západ pravé dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_leve
+                shutter_action: up
+            entity: ''
+            name: západ levé nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_leve
+                shutter_action: down
+            entity: ''
+            name: západ levé dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_prave
+                shutter_action: up
+            entity: ''
+            name: jih pravé nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_prave
+                shutter_action: down
+            entity: ''
+            name: jih levé dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_leve
+                shutter_action: up
+            entity: ''
+            name: jih levé nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_leve
+                shutter_action: down
+            entity: ''
+            name: jih pravé dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - type: heading
+            icon: mdi:fridge
+            heading: Dětský pokoj Julie
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_julie
+                shutter_action: up
+            entity: ''
+            name: nahoru
+            icon: mdi:window-shutter-open
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_julie
+                shutter_action: down
+            entity: ''
+            name: dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - type: heading
+            icon: mdi:fridge
+            heading: Dětský pokoj Kuba
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_kuba
+                shutter_action: up
+            entity: ''
+            name: nahoru
+            icon: mdi:window-shutter-open
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_kuba
+                shutter_action: down
+            entity: ''
+            name: dolů
+            icon: mdi:window-shutter
+            show_state: true
+          - type: heading
+            icon: mdi:fridge
+            heading: Ložnice
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: loznice
+                shutter_action: up
+            entity: ''
+            name: nahoru
+            icon: mdi:window-shutter-open
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: loznice
+                shutter_action: down
+            entity: ''
+            name: dolů
+            icon: mdi:window-shutter
+            show_state: true

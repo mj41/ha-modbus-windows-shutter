@@ -1,0 +1,32 @@
+shutters:
+  kuchyn:
+    relays: [1, 2]
+    timing: [35, 35]
+  obyvak_zapad_prave:
+    relays: [3, 4]
+    timing: [55, 55]
+  obyvak_zapad_leve:
+    relays: [5, 6]
+    timing: [55, 55]
+  obyvak_jih_prave:
+    relays: [7, 8]
+    timing: [55, 55]
+  obyvak_jih_leve:
+    relays: [9, 10]
+    timing: [55, 55]
+  detsky_julie:
+    relays: [11, 12]
+    timing: [55, 55]
+  detsky_kuba:
+    relays: [13, 14]
+    timing: [55, 55]
+  loznice:
+    relays: [15, 16]
+    timing: [35, 35]
+shutter_groups:
+  vse: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
+  obyvak_kuchyn: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
+  jih: [obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba]
+  jih_vychod: [obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
+  zapad: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve]
+  detske_loznice: [detsky_julie, detsky_kuba, loznice]
