@@ -273,7 +273,7 @@ views:
                 shutter_name: obyvak_jih_prave
                 shutter_action: down
             entity: ''
-            name: jih levé dolů
+            name: jih pravé dolů
             icon: mdi:window-shutter
             show_state: true
           - show_name: true
@@ -299,7 +299,7 @@ views:
                 shutter_name: obyvak_jih_leve
                 shutter_action: down
             entity: ''
-            name: jih pravé dolů
+            name: jih levé dolů
             icon: mdi:window-shutter
             show_state: true
           - type: heading
