@@ -9,24 +9,20 @@ shutters:
       relay_seq:
         - relay_num: 2
           delay: 35
-    sunA: # Tilt slightly open
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 2 # Ensure fully closed first
-          delay: 35
-        - relay_num: 1 # Brief up pulse
-          delay: 0.6
-    sunB: # Tilt more open
+        - relay_num: 1 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 2
+        - relay_num: 2 # DOWN relay
           delay: 35
-        - relay_num: 1
+        - relay_num: 1 # UP relay
           delay: 0.9
-    sunC: # Tilt even more open
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 2
-          delay: 35
-        - relay_num: 1
-          delay: 1.2
+        - relay_num: 2 # DOWN relay
+          delay: 0.25
   obyvak_zapad_prave:
     up:
       relay_seq:
@@ -36,24 +32,20 @@ shutters:
       relay_seq:
         - relay_num: 4
           delay: 55
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 4
-          delay: 55
-        - relay_num: 3
-          delay: 0.6
-    sunB:
+        - relay_num: 3 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 4
+        - relay_num: 4 # DOWN relay
           delay: 55
-        - relay_num: 3
+        - relay_num: 3 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 4
-          delay: 55
-        - relay_num: 3
-          delay: 1.2
+        - relay_num: 4 # DOWN relay
+          delay: 0.25
   obyvak_zapad_leve:
     up:
       relay_seq:
@@ -63,24 +55,20 @@ shutters:
       relay_seq:
         - relay_num: 6
           delay: 55
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 6
-          delay: 55
-        - relay_num: 5
-          delay: 0.6
-    sunB:
+        - relay_num: 5 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 6
+        - relay_num: 6 # DOWN relay
           delay: 55
-        - relay_num: 5
+        - relay_num: 5 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 6
-          delay: 55
-        - relay_num: 5
-          delay: 1.2
+        - relay_num: 6 # DOWN relay
+          delay: 0.25
   obyvak_jih_prave:
     up:
       relay_seq:
@@ -90,24 +78,20 @@ shutters:
       relay_seq:
         - relay_num: 8
           delay: 55
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 8
-          delay: 55
-        - relay_num: 7
-          delay: 0.6
-    sunB:
+        - relay_num: 7 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 8
+        - relay_num: 8 # DOWN relay
           delay: 55
-        - relay_num: 7
+        - relay_num: 7 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 8
-          delay: 55
-        - relay_num: 7
-          delay: 1.2
+        - relay_num: 8 # DOWN relay
+          delay: 0.25
   obyvak_jih_leve:
     up:
       relay_seq:
@@ -117,24 +101,20 @@ shutters:
       relay_seq:
         - relay_num: 10
           delay: 55
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 10
-          delay: 55
-        - relay_num: 9
-          delay: 0.6
-    sunB:
+        - relay_num: 9 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 10
+        - relay_num: 10 # DOWN relay
           delay: 55
-        - relay_num: 9
+        - relay_num: 9 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 10
-          delay: 55
-        - relay_num: 9
-          delay: 1.2
+        - relay_num: 10 # DOWN relay
+          delay: 0.25
   detsky_julie:
     up:
       relay_seq:
@@ -144,24 +124,20 @@ shutters:
       relay_seq:
         - relay_num: 12
           delay: 55
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 12
-          delay: 55
-        - relay_num: 11
-          delay: 0.6
-    sunB:
+        - relay_num: 11 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 12
+        - relay_num: 12 # DOWN relay
           delay: 55
-        - relay_num: 11
+        - relay_num: 11 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 12
-          delay: 55
-        - relay_num: 11
-          delay: 1.2
+        - relay_num: 12 # DOWN relay
+          delay: 0.25
   detsky_kuba:
     up:
       relay_seq:
@@ -171,24 +147,20 @@ shutters:
       relay_seq:
         - relay_num: 14
           delay: 55
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 14
-          delay: 55
-        - relay_num: 13
-          delay: 0.6
-    sunB:
+        - relay_num: 13 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 14
+        - relay_num: 14 # DOWN relay
           delay: 55
-        - relay_num: 13
+        - relay_num: 13 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 14
-          delay: 55
-        - relay_num: 13
-          delay: 1.2
+        - relay_num: 14 # DOWN relay
+          delay: 0.25
   loznice:
     up:
       relay_seq:
@@ -198,30 +170,27 @@ shutters:
       relay_seq:
         - relay_num: 16
           delay: 35
-    sunA:
+    sun_more: # Tilt more open
       relay_seq:
-        - relay_num: 16
-          delay: 35
-        - relay_num: 15
-          delay: 0.6
-    sunB:
+        - relay_num: 15 # UP relay
+          delay: 0.25
+    sun_day: # Standard day tilt
       relay_seq:
-        - relay_num: 16
+        - relay_num: 16 # DOWN relay
           delay: 35
-        - relay_num: 15
+        - relay_num: 15 # UP relay
           delay: 0.9
-    sunC:
+    sun_less: # Tilt less open
       relay_seq:
-        - relay_num: 16
-          delay: 35
-        - relay_num: 15
-          delay: 1.2
+        - relay_num: 16 # DOWN relay
+          delay: 0.25
 shutter_groups:
   vse: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
   vychod: [loznice]
   jih: [obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba]
   jih_vychod: [obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
   zapad: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve]
+  detske: [detsky_julie, detsky_kuba]
   detske_loznice: [detsky_julie, detsky_kuba, loznice]
   obyvak: [obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
   obyvak_kuchyn: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]

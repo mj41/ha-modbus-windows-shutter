@@ -428,10 +428,10 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: vychod
-                shutter_action: sunB
+                shutter_action: sun_day
             entity: ''
-            name: přes den
-            icon: mdi:white-balance-sunny
+            name: den
+            icon: mdi:weather-sunny
             show_state: true
             grid_options:
               columns: 6
@@ -444,14 +444,11 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: vychod
-                shutter_action: sunA
+                shutter_action: sun_less
             entity: ''
-            name: ráno
-            icon: mdi:weather-sunset-up
+            name: méně
+            icon: mdi:sun-angle-outline
             show_state: true
-            grid_options:
-              columns: 6
-              rows: 2
           - show_name: true
             show_icon: true
             type: button
@@ -460,10 +457,10 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: vychod
-                shutter_action: sunC
+                shutter_action: sun_more
             entity: ''
-            name: večer
-            icon: mdi:weather-sunset-down
+            name: více
+            icon: mdi:sun-angle
             show_state: true
       - type: grid
         cards:
@@ -478,10 +475,10 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: jih
-                shutter_action: sunB
+                shutter_action: sun_day
             entity: ''
-            name: přes den
-            icon: mdi:white-balance-sunny
+            name: den
+            icon: mdi:weather-sunny
             show_state: true
             grid_options:
               columns: 6
@@ -494,14 +491,11 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: jih
-                shutter_action: sunA
+                shutter_action: sun_less
             entity: ''
-            name: ráno
-            icon: mdi:weather-sunset-up
+            name: méně
+            icon: mdi:sun-angle-outline
             show_state: true
-            grid_options:
-              columns: 6
-              rows: 2
           - show_name: true
             show_icon: true
             type: button
@@ -510,10 +504,10 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: jih
-                shutter_action: sunC
+                shutter_action: sun_more
             entity: ''
-            name: večer
-            icon: mdi:weather-sunset-down
+            name: více
+            icon: mdi:sun-angle
             show_state: true
       - type: grid
         cards:
@@ -528,10 +522,10 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: zapad
-                shutter_action: sunB
+                shutter_action: sun_day
             entity: ''
-            name: přes den
-            icon: mdi:white-balance-sunny
+            name: den
+            icon: mdi:weather-sunny
             show_state: true
             grid_options:
               columns: 6
@@ -544,10 +538,10 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: zapad
-                shutter_action: sunA
+                shutter_action: sun_less
             entity: ''
-            name: ráno
-            icon: mdi:weather-sunset-up
+            name: méně
+            icon: mdi:sun-angle-outline
             show_state: true
             grid_options:
               columns: 6
@@ -560,8 +554,8 @@ views:
               perform_action: shell_command.custom_windows_shutter
               data:
                 shutter_name: zapad
-                shutter_action: sunC
+                shutter_action: sun_more
             entity: ''
-            name: večer
-            icon: mdi:weather-sunset-down
+            name: více
+            icon: mdi:sun-angle
             show_state: true
