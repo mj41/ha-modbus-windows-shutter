@@ -35,20 +35,39 @@ class ConfigLoader:
             raise
 
     def validate_shutter_config(self, full_config: Dict[str, Any]) -> bool:
-        """Validate the structure of the shutter configuration."""
+        """Validate the structure and version of the shutter configuration."""
         if not isinstance(full_config, dict):
             logger.error("Shutter configuration must be a dictionary.")
             return False
 
-        required_keys = ['shutters']
+        required_keys = ['config_version', 'shutters']
         for key in required_keys:
             if key not in full_config:
                 logger.error(f"Shutter configuration must contain '{key}'.")
                 return False
-            if not isinstance(full_config[key], dict):
-                 logger.error(f"'{key}' must be a dictionary.")
-                 return False
 
+        # Validate config version
+        version = full_config.get('config_version', '')
+        if not isinstance(version, str) or not version.startswith('v'):
+            logger.error("Invalid or missing 'config_version'. Expected format 'vX.Y.Z'.")
+            return False
+
+        try:
+            major_version = version.split('.')[0][1:] # Extract 'X' from 'vX.Y.Z'
+            if major_version != '0':
+                logger.error(f"Unsupported configuration version: '{version}'. Major version must be '0'.")
+                return False
+            logger.info(f"Configuration version '{version}' loaded successfully.")
+        except IndexError:
+            logger.error(f"Invalid configuration version format: '{version}'. Expected format 'vX.Y.Z'.")
+            return False
+
+        # Validate shutters structure
+        if not isinstance(full_config['shutters'], dict):
+             logger.error(f"'shutters' must be a dictionary.")
+             return False
+
+        # Validate optional shutter_groups structure
         if 'shutter_groups' in full_config and not isinstance(full_config['shutter_groups'], dict):
             logger.error("Shutter configuration 'shutter_groups' must be a dictionary.")
             return False
@@ -72,8 +91,8 @@ class ConfigLoader:
                 raise ValueError("Invalid modbus configuration")
 
             full_config = self.load_yaml_file(shutter_config_path)
-            if not self.validate_shutter_config(full_config) :
-                raise ValueError("Invalid shutter configuration")
+            if not self.validate_shutter_config(full_config): # This now includes version check
+                raise ValueError("Invalid or unsupported shutter configuration")
 
             shutters = full_config['shutters']
             groups = full_config.get('shutter_groups', {})
@@ -87,7 +106,7 @@ class ConfigLoader:
             logger.error(f"Error parsing YAML file: {e}")
             raise
         except ValueError as e:
-            logger.error(f"Invalid configuration: {e}")
+            logger.error(f"Invalid configuration: {e}") # Error message now more generic
             raise
         except Exception as e:
             logger.error(f"Failed to load and validate configurations: {e}")
