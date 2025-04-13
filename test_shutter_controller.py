@@ -2,14 +2,17 @@ import unittest
 from unittest.mock import MagicMock, patch, call, ANY
 import time
 from typing import List, Union, Tuple
+import logging  # Added import
 
 # Assuming custom_windows_shutter.py is in the same directory or accessible via PYTHONPATH
-from custom_windows_shutter import ShutterController, ModbusRelayError, FLOAT_TOLERANCE
+from custom_windows_shutter import ShutterController, ModbusRelayError
 
+# Configure basic logging for tests to show logger name and level
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s [%(name)s][%(levelname)s] %(message)s")
 
 # Sample configurations for testing
 SAMPLE_MODBUS_CONFIG = {'CONNECTION_TYPE': 'serial', 'DEVICE_PORT': '/dev/null', 'SLAVE_ID': 1}
-SAMPLE_SHUTTERS = {
+SAMPLE_SHUTTERS_RAW = {
     'shutter1': {
         'up': {'relay_seq': [{'relay_num': 1, 'delay': 1.0}]},
         'down': {'relay_seq': [{'relay_num': 2, 'delay': 2.0}]}
@@ -22,6 +25,21 @@ SAMPLE_SHUTTERS = {
         'down': {'relay_seq': [{'relay_num': 5, 'delay': 2.0}]}
     }
 }
+SAMPLE_SHUTTERS = {}
+for s_name, actions in SAMPLE_SHUTTERS_RAW.items():
+    SAMPLE_SHUTTERS[s_name] = {}
+    for a_name, config in actions.items():
+        SAMPLE_SHUTTERS[s_name][a_name] = {}
+        if 'relay_seq' in config:
+            SAMPLE_SHUTTERS[s_name][a_name]['relay_seq'] = []
+            if config['relay_seq']:
+                for step in config['relay_seq']:
+                    new_step = step.copy()
+                    new_step['delay_ms'] = int(step['delay'] * 1000)
+                    SAMPLE_SHUTTERS[s_name][a_name]['relay_seq'].append(new_step)
+            else:
+                SAMPLE_SHUTTERS[s_name][a_name]['relay_seq'] = []
+
 SAMPLE_GROUPS = {
     'group1': ['shutter1', 'shutter2'],
     'group2': ['shutter1', 'shutter3'],
@@ -35,7 +53,7 @@ EXPECTED_TIMELINES = {
         'action': 'up',
         'timeline': [
             ('on', [1]),
-            ('delay', 1.0),
+            ('delay', 1000),
             ('on', []),
         ]
     },
@@ -44,9 +62,9 @@ EXPECTED_TIMELINES = {
         'action': 'up',
         'timeline': [
             ('on', [3]),
-            ('delay', 0.5),
+            ('delay', 500),
             ('on', [4]),
-            ('delay', 0.7),
+            ('delay', 700),
             ('on', []),
         ]
     },
@@ -54,12 +72,12 @@ EXPECTED_TIMELINES = {
         'target': ['shutter1', 'shutter2'],
         'action': 'up',
         'timeline': [
-            ('on', [1]),
-            ('delay', 1.0),
-            ('on', [3]),
-            ('delay', 0.5),
+            ('on', [1, 3]),
+            ('delay', 500),
+            ('on', [1, 4]),
+            ('delay', 500),
             ('on', [4]),
-            ('delay', 0.7),
+            ('delay', 200),
             ('on', []),
         ]
     },
@@ -67,10 +85,8 @@ EXPECTED_TIMELINES = {
         'target': ['shutter1', 'shutter3'],
         'action': 'down',
         'timeline': [
-            ('on', [2]),
-            ('delay', 2.0),
-            ('on', [5]),
-            ('delay', 2.0),
+            ('on', [2, 5]),
+            ('delay', 2000),
             ('on', []),
         ]
     },
@@ -84,7 +100,7 @@ EXPECTED_TIMELINES = {
         'action': 'up',
         'timeline': [
             ('on', [1]),
-            ('delay', 1.0),
+            ('delay', 1000),
             ('on', []),
         ]
     },
@@ -93,7 +109,7 @@ EXPECTED_TIMELINES = {
         'action': 'down',
         'timeline': [
             ('on', [2]),
-            ('delay', 2.0),
+            ('delay', 2000),
             ('on', []),
         ]
     }
@@ -106,7 +122,7 @@ def compare_timelines(test_case, generated, expected):
         exp_cmd, exp_data = exp_evt
         test_case.assertEqual(gen_cmd, exp_cmd, f"Command mismatch at index {i}")
         if gen_cmd == 'delay':
-            test_case.assertAlmostEqual(gen_data, exp_data, places=5, msg=f"Delay mismatch at index {i}")
+            test_case.assertEqual(gen_data, exp_data, f"Delay mismatch at index {i}")
         elif gen_cmd == 'on':
             test_case.assertListEqual(sorted(gen_data), sorted(exp_data), msg=f"'On' list mismatch at index {i}")
         else:
@@ -117,6 +133,8 @@ class TestShutterControllerTimeline(unittest.TestCase):
 
     def setUp(self):
         """Set up for test methods."""
+        # Create a logger specific to this test class
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.mock_modbus_client_patcher = patch('custom_windows_shutter.ModbusRelayClient')
         self.MockModbusRelayClientClass = self.mock_modbus_client_patcher.start()
         self.mock_client_instance = self.MockModbusRelayClientClass.return_value
@@ -138,42 +156,49 @@ class TestShutterControllerTimeline(unittest.TestCase):
     def test_timeline_shutter1_up(self):
         name = 'shutter1-up'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
     def test_timeline_shutter2_up(self):
         name = 'shutter2-up'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")více
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
     def test_timeline_group1_up(self):
         name = 'group1-up'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
     def test_timeline_group2_down(self):
         name = 'group2-down'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
     def test_timeline_empty_group_up(self):
         name = 'empty_group-up'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
     def test_timeline_missing_action_up(self):
         name = 'missing_action-up'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
     def test_timeline_empty_sequence_down(self):
         name = 'empty_sequence-down'
         expected_data = EXPECTED_TIMELINES[name]
+        self.logger.debug(f"Testing timeline for {name}: {expected_data}")
         generated_timeline = self.controller._generate_group_timeline(expected_data['target'], expected_data['action'])
         compare_timelines(self, generated_timeline, expected_data['timeline'])
 
@@ -198,15 +223,20 @@ class TestShutterControllerTimeline(unittest.TestCase):
                         expected_state[relay_num - 1] = True
                 expected_modbus_calls.append(call.write_relays(expected_state))
             elif cmd == 'delay':
-                if data > FLOAT_TOLERANCE:
-                    expected_sleep_calls.append(call(data))
+                if data > 0:
+                    expected_sleep_calls.append(call(data / 1000.0))
 
         expected_modbus_calls.append(call.reset_relays())
 
         actual_modbus_calls = [c for c in self.mock_client_instance.mock_calls if c[0] in ('reset_relays', 'write_relays')]
 
+        self.assertEqual(len(mock_sleep.call_args_list), len(expected_sleep_calls), "Number of sleep calls differ")
+        for i, actual_call in enumerate(mock_sleep.call_args_list):
+            expected_call = expected_sleep_calls[i]
+            # Use .args[0] instead of [0][0] for clarity and robustness
+            self.assertAlmostEqual(actual_call.args[0], expected_call.args[0], places=5, msg=f"Sleep call argument mismatch at index {i}")
+
         self.assertEqual(actual_modbus_calls, expected_modbus_calls)
-        self.assertEqual(mock_sleep.call_args_list, expected_sleep_calls)
 
     @patch('custom_windows_shutter.ShutterController._generate_group_timeline')
     @patch('custom_windows_shutter.ShutterController._execute_timeline')

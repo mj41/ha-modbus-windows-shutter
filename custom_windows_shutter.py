@@ -14,7 +14,7 @@ import custom_windows_shutter_constants as constants
 from config_loader import ConfigLoader
 
 # Configure logging and create a module logger
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
 # Define action constants
@@ -22,11 +22,8 @@ ACTION_STOP = 'stop'
 
 # Type alias for timeline events: (command, data)
 # command: "on" -> data: List[int] of active relays
-# command: "delay" -> data: float seconds to wait
-TimelineEvent = Tuple[str, Union[List[int], float]]
-
-# Small tolerance for float comparisons
-FLOAT_TOLERANCE = 1e-6
+# command: "delay" -> data: int milliseconds to wait
+TimelineEvent = Tuple[str, Union[List[int], int]]
 
 class ShutterController:
     """Encapsulates the logic for controlling shutters and groups."""
@@ -66,19 +63,17 @@ class ShutterController:
             self.client.close()
 
     def _generate_group_timeline(self, group_shutters: List[str], action: str) -> List[TimelineEvent]:
-        """Generate a sorted timeline of state changes for a group action."""
-        # Check for empty input group immediately
+        """Generate a sorted timeline based on states at unique time points (milliseconds)."""
         if not group_shutters:
             logger.info("Input group is empty. Returning empty timeline.")
             return []
 
-        relay_events: List[Tuple[float, float, int]] = []
-        current_shutter_offset = 0.0
-
-        logger.info(f"Generating state-based timeline for action '{action}'...")
-
+        # 1. Gather Relay Events & Max Duration
+        relay_events: List[Tuple[int, int, int]] = []
+        max_shutter_duration_ms = 0
+        logger.info(f"Generating merged timeline for action '{action}' (using milliseconds)...")
         for shutter_name in group_shutters:
-            logger.debug(f"Processing shutter '{shutter_name}' for timeline at offset {current_shutter_offset:.3f}s")
+            logger.debug(f"Processing shutter '{shutter_name}' for merged timeline")
             if shutter_name not in self.shutters:
                 logger.warning(f"Shutter '{shutter_name}' not found. Skipping.")
                 continue
@@ -86,94 +81,121 @@ class ShutterController:
             if action not in shutter_config:
                 logger.warning(f"Action '{action}' not defined for '{shutter_name}'. Skipping.")
                 continue
-
             action_config = shutter_config[action]
             relay_seq = action_config.get('relay_seq')
             if not relay_seq:
                 logger.info(f"Action '{action}' for '{shutter_name}' is empty. Skipping.")
                 continue
-
-            shutter_local_time = 0.0
+            shutter_local_time_ms = 0
             for step in relay_seq:
                 relay_num = step['relay_num']
-                delay = step['delay']
-                start_time = current_shutter_offset + shutter_local_time
-                end_time = start_time + delay
-                relay_events.append((start_time, end_time, relay_num))
-                logger.debug(f"  Relay {relay_num}: ON at {start_time:.3f}s, OFF at {end_time:.3f}s")
-                shutter_local_time += delay
+                delay_ms = step['delay_ms']
+                start_time_ms = shutter_local_time_ms
+                end_time_ms = start_time_ms + delay_ms
+                relay_events.append((start_time_ms, end_time_ms, relay_num))
+                logger.debug(f"  Relay {relay_num}: ON at {start_time_ms}ms, OFF at {end_time_ms}ms (relative to shutter start)")
+                shutter_local_time_ms += delay_ms
+            max_shutter_duration_ms = max(max_shutter_duration_ms, shutter_local_time_ms)
 
-            current_shutter_offset += shutter_local_time
-
-        # Check if any events were actually generated
-        if not relay_events:
-            logger.info("No relay events generated (shutters missing/actions empty?). Returning empty timeline.")
+        if not relay_events and max_shutter_duration_ms == 0:
+            logger.info("No relay events generated and max duration is 0. Returning empty timeline.")
             return []
 
-        time_points = set([0.0])
+        # 2. Identify Key Time Points
+        time_points_ms = set([0, max_shutter_duration_ms])
         for start, end, _ in relay_events:
-            time_points.add(start)
-            time_points.add(end)
+            time_points_ms.add(start)
+            time_points_ms.add(end)
+        sorted_times_ms = sorted([t for t in time_points_ms if t >= 0])
+        sorted_times_ms = sorted(list(set(sorted_times_ms)))
 
-        sorted_times = sorted(list(time_points))
-        timeline: List[TimelineEvent] = []
-        last_time = 0.0
+        logger.debug(f"Unique time points for merging (ms): {sorted_times_ms}")
 
-        for t in sorted_times:
-            if abs(t - last_time) < FLOAT_TOLERANCE and timeline:
-                continue
+        if not sorted_times_ms:
+            if max_shutter_duration_ms == 0:
+                logger.info("Max duration is 0 and no time points identified. Returning empty timeline.")
+                return []
+            else:
+                sorted_times_ms = [0, max_shutter_duration_ms]
 
+        # 3. Calculate State at Each Time Point
+        states_at_time: Dict[int, List[int]] = {}
+        for t_ms in sorted_times_ms:
             active_relays = set()
             for start, end, r_num in relay_events:
-                if (start <= t + FLOAT_TOLERANCE) and (t < end - FLOAT_TOLERANCE):
+                if start <= t_ms < end:
                     active_relays.add(r_num)
+            states_at_time[t_ms] = sorted(list(active_relays))
+        logger.debug(f"States at time points (ms): {states_at_time}")
 
-            current_active_list = sorted(list(active_relays))
-            delay_duration = t - last_time
+        # 4. Build Timeline from States and Durations
+        timeline: List[TimelineEvent] = []
+        last_added_on_state: Optional[List[int]] = None
 
-            if delay_duration > FLOAT_TOLERANCE:
-                last_state = timeline[-1][1] if timeline and timeline[-1][0] == 'on' else []
-                if not timeline or current_active_list != last_state:
-                    logger.debug(f"  Timeline Add: ('delay', {delay_duration:.3f})")
-                    timeline.append(("delay", round(delay_duration, 3)))
+        for i in range(len(sorted_times_ms) - 1):
+            t1_ms = sorted_times_ms[i]
+            t2_ms = sorted_times_ms[i+1]
+            state_during_interval = states_at_time[t1_ms]
+            duration_ms = t2_ms - t1_ms
 
-            if not timeline or timeline[-1] != ("on", current_active_list):
-                logger.debug(f"  Timeline Add: ('on', {current_active_list}) at {t:.3f}s")
-                timeline.append(("on", current_active_list))
+            if duration_ms > 0:
+                state_changed = (last_added_on_state is None or state_during_interval != last_added_on_state)
 
-            last_time = t
+                if state_changed:
+                    timeline.append(("on", state_during_interval))
+                    last_added_on_state = state_during_interval
+                    logger.debug(f"  Timeline Add: ('on', {state_during_interval}) for interval starting at {t1_ms}ms")
+                    timeline.append(("delay", duration_ms))
+                    logger.debug(f"  Timeline Add: ('delay', {duration_ms})")
+                else:
+                    if timeline and timeline[-1][0] == 'delay':
+                        timeline[-1] = ('delay', timeline[-1][1] + duration_ms)
+                        logger.debug(f"  Timeline Merge Delay: Updated to {timeline[-1][1]}ms")
+                    else:
+                        timeline.append(("delay", duration_ms))
+                        logger.debug(f"  Timeline Add (unexpected): ('delay', {duration_ms})")
 
-        final_state = timeline[-1][1] if timeline and timeline[-1][0] == 'on' else []
-        if final_state:
-            max_end_time = max([end for _, end, _ in relay_events] + [0.0])
-            if max_end_time > last_time + FLOAT_TOLERANCE:
-                final_delay = round(max_end_time - last_time, 3)
-                if final_delay > FLOAT_TOLERANCE:
-                    logger.debug(f"  Timeline Add: ('delay', {final_delay:.3f}) (final)")
-                    timeline.append(("delay", final_delay))
-            logger.debug(f"  Timeline Add: ('on', []) (final state at {max_end_time:.3f}s)")
-            timeline.append(("on", []))
+        # 5. Final State & Cleanup
+        final_state = states_at_time[sorted_times_ms[-1]]
+        if last_added_on_state is None or final_state != last_added_on_state:
+            if not timeline and final_state != []:
+                timeline.append(("on", final_state))
+                logger.debug(f"  Timeline Add: Initial and final state ('on', {final_state}) at 0ms")
+            elif timeline:
+                timeline.append(("on", final_state))
+                last_added_on_state = final_state
+                logger.debug(f"  Timeline Add: Final state ('on', {final_state}) at {sorted_times_ms[-1]}ms")
 
-        clean_timeline = []
-        last_on_state = None
-        for i, event in enumerate(timeline):
-            cmd, data = event
-            if cmd == "delay":
-                if data > FLOAT_TOLERANCE:
-                    clean_timeline.append(event)
-            elif cmd == "on":
-                if data != last_on_state:
-                    clean_timeline.append(event)
-                    last_on_state = data
+        clean_timeline = [evt for evt in timeline if not (evt[0] == 'delay' and evt[1] == 0)]
 
-        if clean_timeline and clean_timeline[-1][0] == 'delay':
-            clean_timeline.pop()
+        if max_shutter_duration_ms > 0:
+            if not clean_timeline or clean_timeline[-1] != ('on', []):
+                if clean_timeline and clean_timeline[-1][0] == 'on':
+                    if clean_timeline[-1][1] != []:
+                        logger.debug("Timeline cleanup: Replacing last 'on' state with ('on', [])")
+                        clean_timeline[-1] = ('on', [])
+                elif clean_timeline and clean_timeline[-1][0] == 'delay':
+                    logger.debug("Timeline cleanup: Appending final ('on', []) after delay")
+                    clean_timeline.append(('on', []))
+                elif not clean_timeline:
+                    logger.debug("Timeline cleanup: Adding ('on', []) to empty timeline (max_duration > 0)")
+                    clean_timeline.append(('on', []))
 
-        logger.info(f"State-based timeline generation complete. Events: {len(clean_timeline)}")
+        if clean_timeline and clean_timeline[0][0] == 'delay':
+            logger.warning("Timeline cleanup: Removing unexpected leading delay.")
+            clean_timeline.pop(0)
+
+        if clean_timeline and clean_timeline[0][0] != 'on':
+            logger.warning("Timeline cleanup: First event is not 'on'. Prepending initial state.")
+            initial_state_at_zero = states_at_time.get(0, [])
+            clean_timeline.insert(0, ('on', initial_state_at_zero))
+
+        logger.info(f"Merged timeline generation complete. Events: {len(clean_timeline)}")
+        logger.debug(f"Final Timeline (ms): {clean_timeline}")
         return clean_timeline
 
     def _execute_timeline(self, timeline: List[TimelineEvent]) -> bool:
-        """Execute a pre-generated state-based timeline."""
+        """Execute a pre-generated state-based timeline (delays in ms)."""
         if not self._ensure_connected(): return False
         assert self.client is not None
 
@@ -189,9 +211,10 @@ class ShutterController:
                 logger.info(f"Timeline Step {i+1}: Executing {command} with data {data}")
 
                 if command == "delay":
-                    if isinstance(data, (int, float)) and data > FLOAT_TOLERANCE:
-                        logger.debug(f"  Sleeping for {data:.3f} seconds...")
-                        sleep(data)
+                    if isinstance(data, int) and data > 0:
+                        sleep_seconds = data / 1000.0
+                        logger.debug(f"  Sleeping for {sleep_seconds:.3f} seconds ({data} ms)...")
+                        sleep(sleep_seconds)
                 elif command == "on":
                     if isinstance(data, list):
                         relay_state_list = [False] * 32
@@ -208,6 +231,7 @@ class ShutterController:
                     else:
                         logger.error(f"  Invalid data type for 'on' command: {type(data)}")
                         raise ValueError("Invalid timeline event data for 'on' command")
+
                 else:
                     logger.error(f"Timeline: Unknown command '{command}'")
                     raise ValueError(f"Unknown timeline command: {command}")

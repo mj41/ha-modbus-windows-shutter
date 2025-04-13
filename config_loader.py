@@ -117,7 +117,7 @@ class ConfigLoader:
                     raise ValueError(f"Invalid group '{group_name}': shutter '{shutter}' not defined.")
 
     def load_and_validate_configs(self, modbus_config_path: str, shutter_config_path: str) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
-        """Load and validate the Modbus and shutter configurations."""
+        """Load and validate the Modbus and shutter configurations, converting delays to milliseconds."""
         try:
             modbus_config = self.load_yaml_file(modbus_config_path)
             if not validate_config(modbus_config): # Use imported validate_config
@@ -129,6 +129,18 @@ class ConfigLoader:
 
             shutters = full_config['shutters']
             groups = full_config.get('shutter_groups', {})
+
+            # Convert delays to milliseconds (int) after validation
+            for shutter_name, actions in shutters.items():
+                for action_name, action_config in actions.items():
+                    if 'relay_seq' in action_config and action_config['relay_seq']:
+                        for step in action_config['relay_seq']:
+                            # Convert float seconds to int milliseconds
+                            step['delay_ms'] = int(step['delay'] * 1000)
+                            # Optionally remove the old key, or keep it for reference
+                            # del step['delay']
+                            logger.debug(f"Converted delay for {shutter_name}/{action_name}: {step['delay']}s -> {step['delay_ms']}ms")
+
 
             self.validate_group_config(groups, shutters)
             return modbus_config, shutters, groups
