@@ -1,4 +1,4 @@
 CONNECTION_TYPE: "serial"
-DEVICE_PORT: "/dev/ttyACM0"
+DEVICE_PORT: "/dev/serial/by-id/usb-1a86_USB_Single_Serial_575C024545-if00"
 SLAVE_ID: 1
 DEBUG_MODBUS: false
