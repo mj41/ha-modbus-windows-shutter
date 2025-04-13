@@ -4,11 +4,11 @@ shutters:
     up: # Fully open the shutter
       relay_seq:
         - relay_num: 1
-          delay: 35
+          delay: 37
     down: # Fully close the shutter
       relay_seq:
         - relay_num: 2
-          delay: 35
+          delay: 37
     sun_more: # Tilt more open
       relay_seq:
         - relay_num: 1 # UP relay
@@ -16,7 +16,7 @@ shutters:
     sun_day: # Standard day tilt
       relay_seq:
         - relay_num: 2 # DOWN relay
-          delay: 35
+          delay: 37
         - relay_num: 1 # UP relay
           delay: 0.9
     sun_less: # Tilt less open
