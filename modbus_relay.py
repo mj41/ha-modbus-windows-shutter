@@ -7,10 +7,10 @@ from typing import List, Optional, Dict, Any
 import pymodbus.client as ModbusClient
 from pymodbus import (
     ExceptionResponse,
-    FramerType,
     ModbusException,
     pymodbus_apply_logging_config,
 )
+from pymodbus.framer import FramerType
 
 
 def validate_config(config: Dict[str, Any]) -> bool:
