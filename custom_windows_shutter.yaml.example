@@ -27,6 +27,7 @@ shutters:
           delay: 1
         - relay_num: 1
           delay: 0.4
+
   living_room_east_left:
     up:
       relay_seq:
@@ -36,6 +37,13 @@ shutters:
       relay_seq:
         - relay_num: 4
           delay: 2
+    sunA:
+      relay_seq:
+        - relay_num: 2
+          delay: 1
+        - relay_num: 1
+          delay: 0.1
+
   living_room_east_right:
     up:
       relay_seq:
@@ -45,5 +53,6 @@ shutters:
       relay_seq:
         - relay_num: 6
           delay: 2
+
 shutter_groups:
   east: [kitchen, living_room_east_left, living_room_east_right]

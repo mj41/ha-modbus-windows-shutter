@@ -294,8 +294,7 @@ class ShutterController:
             logger.info(f"--- Group '{group_name}': Controlling shutter '{shutter_name}' for action '{action}' ---")
             # Check if the specific action exists for this shutter in the group
             if shutter_name not in self.shutters or action not in self.shutters[shutter_name]:
-                 logger.error(f"Action '{action}' not defined for shutter '{shutter_name}' in group '{group_name}'. Skipping.")
-                 overall_success = False
+                 logger.warning(f"Action '{action}' not defined for shutter '{shutter_name}' in group '{group_name}'. Skipping.") # Changed from error to warning
                  continue # Skip this shutter and continue with the group
 
             if not self.control_shutter(shutter_name, action):

@@ -36,6 +36,9 @@ python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.e
 echo "Running DOWN test for group 'east'..." | tee -a "$LOGFILE"
 python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.example --modbus_config misc/simulator-modbus-config.yaml down east 2>&1 | tee -a "$LOGFILE"
 
+echo "Running sunA test for group 'east'..." | tee -a "$LOGFILE"
+python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.example --modbus_config misc/simulator-modbus-config.yaml sunA east 2>&1 | tee -a "$LOGFILE"
+
 echo "Running STOP test (global)..." | tee -a "$LOGFILE"
 python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.example --modbus_config misc/simulator-modbus-config.yaml stop 2>&1 | tee -a "$LOGFILE"
 
