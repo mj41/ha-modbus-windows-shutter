@@ -119,7 +119,6 @@ class ShutterController:
 
         return success
 
-
     def control_shutter(self, shutter_name: str, action: str) -> bool:
         """Control a specific shutter by executing the relay sequence for the given action."""
         if shutter_name not in self.shutters:
@@ -165,7 +164,8 @@ class ShutterController:
                 overall_success = False
                 # Decide whether to continue with the rest of the group or stop
                 # Let's continue for now, but log the failure.
-            sleep(0.5) # Add a small delay between shutters in a group
+
+            sleep(0.1) # Add a small delay between shutters in a group
 
         if overall_success:
              logger.info(f"Group '{group_name}' action '{action}' completed.")
