@@ -19,6 +19,9 @@ python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.e
 echo "Running DOWN test for kitchen shutter..." | tee -a "$LOGFILE"
 python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.example --modbus_config misc/simulator-modbus-config.yaml down kitchen 2>&1 | tee -a "$LOGFILE"
 
+echo "Running sunA test for kitchen shutter..." | tee -a "$LOGFILE"
+python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.example --modbus_config misc/simulator-modbus-config.yaml sunA kitchen 2>&1 | tee -a "$LOGFILE"
+
 # Added tests for living_room_east_right
 echo "Running UP test for living_room_east_right shutter..." | tee -a "$LOGFILE"
 python3 custom_windows_shutter.py --shutter_config custom_windows_shutter.yaml.example --modbus_config misc/simulator-modbus-config.yaml up living_room_east_right 2>&1 | tee -a "$LOGFILE"

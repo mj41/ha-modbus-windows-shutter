@@ -1,13 +1,49 @@
-config_version: v0.1.0
+config_version: v1.0.0
 shutters:
   kitchen:
-    relays: [1, 2]
-    timing: [1, 1]
+    up:
+      relay_seq:
+        - relay_num: 1
+          delay: 1
+    down:
+      relay_seq:
+        - relay_num: 2
+          delay: 1
+    sunA:
+      relay_seq:
+        - relay_num: 2
+          delay: 1
+        - relay_num: 1
+          delay: 0.1
+    sunB:
+      relay_seq:
+        - relay_num: 2
+          delay: 1
+        - relay_num: 1
+          delay: 0.3
+    sunC:
+      relay_seq:
+        - relay_num: 2
+          delay: 1
+        - relay_num: 1
+          delay: 0.4
   living_room_east_left:
-    relays: [3, 4]
-    timing: [2, 2]
+    up:
+      relay_seq:
+        - relay_num: 3
+          delay: 2
+    down:
+      relay_seq:
+        - relay_num: 4
+          delay: 2
   living_room_east_right:
-    relays: [5, 6]
-    timing: [2, 2]
+    up:
+      relay_seq:
+        - relay_num: 5
+          delay: 2
+    down:
+      relay_seq:
+        - relay_num: 6
+          delay: 2
 shutter_groups:
   east: [kitchen, living_room_east_left, living_room_east_right]
