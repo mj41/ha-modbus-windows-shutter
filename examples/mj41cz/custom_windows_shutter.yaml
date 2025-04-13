@@ -218,8 +218,10 @@ shutters:
           delay: 1.2
 shutter_groups:
   vse: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
-  obyvak_kuchyn: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
+  vychod: [loznice]
   jih: [obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba]
   jih_vychod: [obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
   zapad: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve]
   detske_loznice: [detsky_julie, detsky_kuba, loznice]
+  obyvak: [obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
+  obyvak_kuchyn: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
