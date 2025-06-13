@@ -18,7 +18,7 @@ shutters:
         - relay_num: 2 # DOWN relay
           delay: 37
         - relay_num: 1 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 2 # DOWN relay
@@ -41,7 +41,7 @@ shutters:
         - relay_num: 4 # DOWN relay
           delay: 55
         - relay_num: 3 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 4 # DOWN relay
@@ -64,7 +64,7 @@ shutters:
         - relay_num: 6 # DOWN relay
           delay: 55
         - relay_num: 5 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 6 # DOWN relay
@@ -87,7 +87,7 @@ shutters:
         - relay_num: 8 # DOWN relay
           delay: 55
         - relay_num: 7 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 8 # DOWN relay
@@ -110,7 +110,7 @@ shutters:
         - relay_num: 10 # DOWN relay
           delay: 55
         - relay_num: 9 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 10 # DOWN relay
@@ -133,7 +133,7 @@ shutters:
         - relay_num: 12 # DOWN relay
           delay: 55
         - relay_num: 11 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 12 # DOWN relay
@@ -156,7 +156,7 @@ shutters:
         - relay_num: 14 # DOWN relay
           delay: 55
         - relay_num: 13 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 14 # DOWN relay
@@ -179,7 +179,7 @@ shutters:
         - relay_num: 16 # DOWN relay
           delay: 35
         - relay_num: 15 # UP relay
-          delay: 0.9
+          delay: 1.1
     sun_less: # Tilt less open
       relay_seq:
         - relay_num: 16 # DOWN relay
