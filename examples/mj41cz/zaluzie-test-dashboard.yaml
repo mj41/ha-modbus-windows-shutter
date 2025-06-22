@@ -1,4 +1,266 @@
 views:
+  - title: Slunce
+    path: slunce
+    icon: mdi:weather-sunny
+    cards: []
+    type: sections
+    max_columns: 1
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Východní strana (ložnice)
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: vychod
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: vychod
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: vychod
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: vychod
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Jižní strana (dětské+obývák)
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: jih
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Západní strana (obyvák+kuchyň)
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: zapad
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: zapad
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: zapad
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+            grid_options:
+              columns: 6
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: zapad
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Obývák jih (jih pravé+levé)
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
   - title: Home
     path: home
     icon: mdi:home-group
@@ -167,9 +429,35 @@ views:
             name: detske_loznice dolů
             icon: mdi:window-shutter
             show_state: true
-  - title: Slunce
-    path: slunce
-    icon: mdi:weather-sunny
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih
+                shutter_action: up
+            entity: ''
+            name: obyvak_jih nahoru
+            icon: mdi:window-shutter-open
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih
+                shutter_action: down
+            entity: ''
+            name: obyvak_jih dolů
+            icon: mdi:window-shutter
+            show_state: true
+  - title: Pokoje Slunce
+    path: pokoje-slunce
+    icon: mdi:home-lightbulb
     cards: []
     type: sections
     max_columns: 1
@@ -177,7 +465,7 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: Východní strana (ložnice)
+            heading: Kuchyň
             heading_style: title
           - show_name: true
             show_icon: true
@@ -186,124 +474,14 @@ views:
               action: perform-action
               perform_action: shell_command.custom_windows_shutter
               data:
-                shutter_name: vychod
+                shutter_name: kuchyn
                 shutter_action: sun_day
             entity: ''
             name: den
             icon: mdi:weather-sunny
             show_state: true
             grid_options:
-              columns: 6
-              rows: 4
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: vychod
-                shutter_action: sun_less
-            entity: ''
-            name: méně
-            icon: mdi:sun-angle-outline
-            show_state: true
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: vychod
-                shutter_action: sun_more
-            entity: ''
-            name: více
-            icon: mdi:sun-angle
-            show_state: true
-      - type: grid
-        cards:
-          - type: heading
-            heading: Jižní strana (dětské+obývák)
-            heading_style: title
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: jih
-                shutter_action: sun_day
-            entity: ''
-            name: den
-            icon: mdi:weather-sunny
-            show_state: true
-            grid_options:
-              columns: 6
-              rows: 4
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: jih
-                shutter_action: sun_less
-            entity: ''
-            name: méně
-            icon: mdi:sun-angle-outline
-            show_state: true
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: jih
-                shutter_action: sun_more
-            entity: ''
-            name: více
-            icon: mdi:sun-angle
-            show_state: true
-      - type: grid
-        cards:
-          - type: heading
-            heading: Západní strana (obyvák+kuchyň)
-            heading_style: title
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: zapad
-                shutter_action: sun_day
-            entity: ''
-            name: den
-            icon: mdi:weather-sunny
-            show_state: true
-            grid_options:
-              columns: 6
-              rows: 4
-          - show_name: true
-            show_icon: true
-            type: button
-            tap_action:
-              action: perform-action
-              perform_action: shell_command.custom_windows_shutter
-              data:
-                shutter_name: zapad
-                shutter_action: sun_less
-            entity: ''
-            name: méně
-            icon: mdi:sun-angle-outline
-            show_state: true
-            grid_options:
-              columns: 6
+              columns: 9
               rows: 2
           - show_name: true
             show_icon: true
@@ -312,7 +490,463 @@ views:
               action: perform-action
               perform_action: shell_command.custom_windows_shutter
               data:
-                shutter_name: zapad
+                shutter_name: kuchyn
+                shutter_action: sun_reset
+              target: {}
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: kuchyn
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: kuchyn
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Obývací pokoj
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_prave
+                shutter_action: sun_day
+            entity: ''
+            name: západ pravé den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_prave
+                shutter_action: sun_reset
+            entity: ''
+            name: západ pravé reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_prave
+                shutter_action: sun_less
+            entity: ''
+            name: západ pravé méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_prave
+                shutter_action: sun_more
+            entity: ''
+            name: západ pravé více
+            icon: mdi:sun-angle
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_leve
+                shutter_action: sun_day
+            entity: ''
+            name: západ levé den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_leve
+                shutter_action: sun_reset
+            entity: ''
+            name: západ levé reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_leve
+                shutter_action: sun_less
+            entity: ''
+            name: západ levé méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_zapad_leve
+                shutter_action: sun_more
+            entity: ''
+            name: západ levé více
+            icon: mdi:sun-angle
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_prave
+                shutter_action: sun_day
+            entity: ''
+            name: jih pravé den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_prave
+                shutter_action: sun_reset
+            entity: ''
+            name: jih pravé reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_prave
+                shutter_action: sun_less
+            entity: ''
+            name: jih pravé méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_prave
+                shutter_action: sun_more
+            entity: ''
+            name: jih pravé více
+            icon: mdi:sun-angle
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_leve
+                shutter_action: sun_day
+            entity: ''
+            name: jih levé den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_leve
+                shutter_action: sun_reset
+            entity: ''
+            name: jih levé reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_leve
+                shutter_action: sun_less
+            entity: ''
+            name: jih levé méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: obyvak_jih_leve
+                shutter_action: sun_more
+            entity: ''
+            name: jih levé více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dětský pokoj Julie
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_julie
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_julie
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_julie
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_julie
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Dětský pokoj Kuba
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_kuba
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_kuba
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_kuba
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: detsky_kuba
+                shutter_action: sun_more
+            entity: ''
+            name: více
+            icon: mdi:sun-angle
+            show_state: true
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ložnice
+            heading_style: title
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: loznice
+                shutter_action: sun_day
+            entity: ''
+            name: den
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 9
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: loznice
+                shutter_action: sun_reset
+            entity: ''
+            name: reset
+            icon: mdi:weather-sunny
+            show_state: true
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: loznice
+                shutter_action: sun_less
+            entity: ''
+            name: méně
+            icon: mdi:sun-angle-outline
+            show_state: true
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: perform-action
+              perform_action: shell_command.custom_windows_shutter
+              data:
+                shutter_name: loznice
                 shutter_action: sun_more
             entity: ''
             name: více

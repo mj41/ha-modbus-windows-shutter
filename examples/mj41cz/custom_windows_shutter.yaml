@@ -23,6 +23,12 @@ shutters:
       relay_seq:
         - relay_num: 2 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 2 # DOWN relay
+          delay: 3
+        - relay_num: 1 # UP relay
+          delay: 1.1
   obyvak_zapad_prave:
     up:
       relay_seq:
@@ -46,6 +52,12 @@ shutters:
       relay_seq:
         - relay_num: 4 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 4 # DOWN relay
+          delay: 3
+        - relay_num: 3 # UP relay
+          delay: 1.1
   obyvak_zapad_leve:
     up:
       relay_seq:
@@ -69,6 +81,12 @@ shutters:
       relay_seq:
         - relay_num: 6 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 6 # DOWN relay
+          delay: 3
+        - relay_num: 5 # UP relay
+          delay: 1.1
   obyvak_jih_prave:
     up:
       relay_seq:
@@ -92,6 +110,12 @@ shutters:
       relay_seq:
         - relay_num: 8 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 8 # DOWN relay
+          delay: 3
+        - relay_num: 7 # UP relay
+          delay: 1.1
   obyvak_jih_leve:
     up:
       relay_seq:
@@ -115,6 +139,12 @@ shutters:
       relay_seq:
         - relay_num: 10 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 10 # DOWN relay
+          delay: 3
+        - relay_num: 9 # UP relay
+          delay: 1.1
   detsky_julie:
     up:
       relay_seq:
@@ -138,6 +168,12 @@ shutters:
       relay_seq:
         - relay_num: 12 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 12 # DOWN relay
+          delay: 3
+        - relay_num: 11 # UP relay
+          delay: 1.1
   detsky_kuba:
     up:
       relay_seq:
@@ -161,6 +197,12 @@ shutters:
       relay_seq:
         - relay_num: 14 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 14 # DOWN relay
+          delay: 3
+        - relay_num: 13 # UP relay
+          delay: 1.1
   loznice:
     up:
       relay_seq:
@@ -184,6 +226,12 @@ shutters:
       relay_seq:
         - relay_num: 16 # DOWN relay
           delay: 0.25
+    sun_reset: # Reset to standard day tilt
+      relay_seq:
+        - relay_num: 16 # DOWN relay
+          delay: 3
+        - relay_num: 15 # UP relay
+          delay: 1.1
 shutter_groups:
   vse: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve, detsky_julie, detsky_kuba, loznice]
   vychod: [loznice]
@@ -194,3 +242,4 @@ shutter_groups:
   detske_loznice: [detsky_julie, detsky_kuba, loznice]
   obyvak: [obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
   obyvak_kuchyn: [kuchyn, obyvak_zapad_prave, obyvak_zapad_leve, obyvak_jih_prave, obyvak_jih_leve]
+  obyvak_jih: [obyvak_jih_prave, obyvak_jih_leve]
